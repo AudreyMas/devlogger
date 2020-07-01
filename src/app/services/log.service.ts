@@ -70,7 +70,7 @@ export class LogService {
     this.logs.forEach((cur, index) => { // cur = log
       if (log.id === cur.id) {
         this.logs.splice(index, 1);
-      } 
+      }  
     });
 
         // Delete to local storage
