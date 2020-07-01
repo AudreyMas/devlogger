@@ -8,12 +8,15 @@ import { of } from 'rxjs/';
 
 import { Log } from '../models/Log';
 
-@Injectable({
-  providedIn: 'root'
-})
+// @Injectable({
+//   providedIn: 'root'
+// })
+@Injectable()
+
 export class LogService {
   logs: Log[];
-  private logSource = new BehaviorSubject<Log>({id: null, text: null, date: null});
+
+  private logSource = new BehaviorSubject<Log>({ id: null, text: null, date: null });
   selectedLog = this.logSource.asObservable();
 
 
@@ -25,11 +28,31 @@ export class LogService {
 
     ]
   }
-//Methods or Functions
+  //Methods or Functions
   getLogs(): Observable<Log[]> {
     return of(this.logs);
   }
   setFormLog(log: Log) {
     this.logSource.next(log);
+  }
+
+  addLog(log: Log) {
+    this.logs.unshift(log); // push on the beginning on the list
+  }
+  updateLog(log: Log) {
+    this.logs.forEach((cur, index) => { // cur = log
+      if (log.id === cur.id) {
+        this.logs.splice(index, 1);
+      }
+    });
+    this.logs.unshift(log);
+  }
+
+  deleteLog(log: Log) {
+    this.logs.forEach((cur, index) => { // cur = log
+      if (log.id === cur.id) {
+        this.logs.splice(index, 1);
+      }
+    });
   }
 }
