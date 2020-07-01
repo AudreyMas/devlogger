@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./log-form.component.scss']
 })
 export class LogFormComponent implements OnInit {
+  text: string; // Error on the console not recognize ".text"
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
 }
