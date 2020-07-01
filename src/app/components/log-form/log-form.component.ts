@@ -1,16 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 
+import { LogService } from '../../services/log.service';
+
+import { Log } from '../../models/Log';
+
+
+
 @Component({
   selector: 'app-log-form',
   templateUrl: './log-form.component.html',
   styleUrls: ['./log-form.component.scss']
 })
 export class LogFormComponent implements OnInit {
-  text: string; // Error on the console not recognize ".text"
+  id: string;
+  text:string;
+  date: any;
 
-  constructor() { }
+  constructor(private logService: LogService) { }
 
   ngOnInit() {
+   // Subscribe to the selectedLog observable
+    this.logService.selectedLog.subscribe(log => { // ERRRRRORRRR
+      if (log.id !== null) {
+        this.id == log.id;
+        this.text = log.text;
+        this.date = log.date;
+      }
+    });
   }
 
 }
